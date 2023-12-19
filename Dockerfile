@@ -10,7 +10,7 @@ WORKDIR /apps
 # Install dependencies, including JDK, Maven, Xvfb, x11vnc, and wget
 RUN apt-get update && \
     apt-get install -y openjdk-11-jdk maven \
-    x11vnc xvfb unzip wget && \
+    x11vnc xvfb unzip wget novnc && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the nbdemetra app
@@ -27,13 +27,11 @@ RUN mkdir ~/.vnc && \
 # Update .bashrc for nbdemetra
 RUN echo "/apps/nbdemetra/bin/nbdemetra" >> ~/.bashrc
 
-# Download and install noVNC
-RUN wget -qO- https://github.com/novnc/noVNC/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C /apps
-
 # Expose ports for VNC and noVNC web client
 EXPOSE 5900 6080
 
 # Start Xvfb, x11vnc and noVNC in the background
 CMD Xvfb :1 -screen 0 1024x768x16 & \
     x11vnc -forever -usepw -create -display :1 & \
-    /apps/utils/launch.sh --vnc localhost:5900 --listen 6080
+    /usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080
+    
