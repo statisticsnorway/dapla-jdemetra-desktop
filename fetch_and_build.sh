@@ -7,7 +7,7 @@ BINARY_URL="https://github.com/jdemetra/jdemetra-app/releases/download/v2.2.4/jd
 BINARY_DIR="./binaries"
 
 # Image name for Docker
-DOCKER_IMAGE_NAME="trygu/nbdemetra:0.6"
+DOCKER_IMAGE_NAME="trygu/nbdemetra:0.7"
 
 # Ensure the binaries directory exists
 mkdir -p "$BINARY_DIR"

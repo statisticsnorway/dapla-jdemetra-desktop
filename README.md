@@ -14,7 +14,7 @@ Follow these instructions to set up JDemetra+ in a Docker container using noVNC 
 
 - Docker installed on your machine. [Download Docker](https://www.docker.com/products/docker-desktop)
 - Internet connection for downloading the JDemetra+ binary and pushing the Docker image.
-- Access to a Docker registry (like Docker Hub) and permission to push to the `trygu` namespace.
+- Access to a Docker registry (like Docker Hub) and permission to push to the `trygu` namespace. Change namespace if you use your own. 
 
 ### Installation
 
@@ -36,17 +36,17 @@ Follow these instructions to set up JDemetra+ in a Docker container using noVNC 
 
 ### Docker Image
 
-The Docker image, named `trygu/nbdemetra:0.6`, includes JDemetra+ version 2.2.4 and a noVNC setup for web access.
+The Docker image, named `trygu/nbdemetra:0.7`, includes JDemetra+ version 2.2.4 and a noVNC setup for web access.
 
 ### Usage
 
 After building and pushing the image to the registry, run a container with the following command:
 
 ```bash
-docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.6
+docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.7
 ```
 
-This command expose both VNC and a noVNC port. 
+or this command to run it without VNC access:
 
 ```bash
 docker run -d -p 6080:6080 trygu/nbdemetra:0.6

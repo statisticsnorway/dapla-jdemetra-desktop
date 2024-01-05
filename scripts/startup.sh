@@ -15,8 +15,8 @@ export X11_XFT_HINTSTYLE=hintslight
 # Disable access control for X11
 xhost +
 
-# Start Fluxbox
-fluxbox &
+# Start Openbox
+openbox-session &
 
 # Start VNC server
 x11vnc -forever -usepw -create -display :1 &
@@ -25,4 +25,4 @@ x11vnc -forever -usepw -create -display :1 &
 /usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080 &
 
 # Start your application (this will be the main process)
-/apps/nbdemetra/bin/nbdemetra
+/home/jdemetra/nbdemetra/bin/nbdemetra -J-Dfile.encoding=UTF-8 -J-Dnetbeans.default_userdir_root=/home/jdemetra/.nbdemetra
