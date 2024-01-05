@@ -4,6 +4,8 @@ JDemetra+ is an open-source software application developed by the National Bank 
 
 This repository contains the Docker setup for JDemetra+, including a noVNC setup for easy web access.
 
+![JDemetra+ Docker Image](jdemetra-docker-image.png)
+
 ## Getting Started
 
 Follow these instructions to set up JDemetra+ in a Docker container using noVNC for web access.
@@ -34,15 +36,23 @@ Follow these instructions to set up JDemetra+ in a Docker container using noVNC 
 
 ### Docker Image
 
-The Docker image, named `trygu/nbdemetra:2.2.4`, includes JDemetra+ version 2.2.4 and a noVNC setup for web access.
+The Docker image, named `trygu/nbdemetra:0.6`, includes JDemetra+ version 2.2.4 and a noVNC setup for web access.
 
 ### Usage
 
 After building and pushing the image to the registry, run a container with the following command:
 
 ```bash
-docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:2.2.4
+docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.6
 ```
+
+This command expose both VNC and a noVNC port. 
+
+```bash
+docker run -d -p 6080:6080 trygu/nbdemetra:0.6
+```
+
+This command only exposes the noVNC port.
 
 This command maps the container's VNC port 5900 and noVNC port 6080 to the same ports on your host machine, allowing you to access JDemetra+:
 
