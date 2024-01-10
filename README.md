@@ -49,7 +49,7 @@ docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.7
 or this command to run it without VNC access:
 
 ```bash
-docker run -d -p 6080:6080 trygu/nbdemetra:0.6
+docker run -d -p 6080:6080 trygu/nbdemetra:0.7
 ```
 
 This command only exposes the noVNC port.
