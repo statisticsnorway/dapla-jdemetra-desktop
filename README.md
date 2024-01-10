@@ -43,13 +43,13 @@ The Docker image, named `trygu/nbdemetra:0.7`, includes JDemetra+ version 2.2.4 
 After building and pushing the image to the registry, run a container with the following command:
 
 ```bash
-docker run -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.7
+docker run run --tmpfs /tmp/.X11-unix:rw,nosuid,nodev,noexec,relatime,size=65536k -d -p 5900:5900 -p 6080:6080 trygu/nbdemetra:0.7
 ```
 
 or this command to run it without VNC access:
 
 ```bash
-docker run -d -p 6080:6080 trygu/nbdemetra:0.7
+docker run run --tmpfs /tmp/.X11-unix:rw,nosuid,nodev,noexec,relatime,size=65536k -d -p 6080:6080 trygu/nbdemetra:0.7
 ```
 
 This command only exposes the noVNC port.
