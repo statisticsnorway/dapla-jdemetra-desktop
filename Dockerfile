@@ -16,14 +16,9 @@ RUN groupadd -r jdemetra && useradd -r -g jdemetra -d /home/jdemetra -m -s /bin/
 # Set the home directory as an environment variable
 ENV HOME=/home/jdemetra
 
-# Set environment variables for XDG directories. Don't really think it's needed.
-ENV XDG_CONFIG_HOME=/home/jdemetra/.config
-ENV XDG_DATA_HOME=/home/jdemetra/.local/share
-ENV XDG_CACHE_HOME=/home/jdemetra/.cache
-ENV XDG_RUNTIME_DIR=/run/user/jdemetra
 
 # Create the directories
-RUN mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_CACHE_HOME $XDG_RUNTIME_DIR \
+RUN mkdir -p /home/jdemetra/examples \
     && chown -R jdemetra:jdemetra /home/jdemetra
 
 # Switch to the new user
@@ -35,6 +30,7 @@ WORKDIR /home/jdemetra
 # Copy the JDemetra+ app and startup script into the container
 COPY --chown=jdemetra:jdemetra ./binaries/jdemetra*.zip ./
 COPY --chown=jdemetra:jdemetra ./scripts/startup.sh ./
+COPY --chown=jdemetra:jdemetra ./examples/* ./examples
 
 # Unzip the JDemetra+ app and remove the archive
 RUN unzip jdemetra*.zip && \
