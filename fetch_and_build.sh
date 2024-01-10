@@ -23,7 +23,7 @@ echo "Download complete. The binary is saved in $BINARY_DIR."
 
 # Build the Docker image
 echo "Building Docker image: $DOCKER_IMAGE_NAME"
-docker build -t "$DOCKER_IMAGE_NAME" .
+docker build --platform linux/amd64 -t "$DOCKER_IMAGE_NAME" .
 
 # Check if the build was successful
 if [ $? -eq 0 ]; then
