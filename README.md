@@ -1,3 +1,11 @@
+# JDemetra+ Docker Setup
+
+JDemetra+ is an open-source software application developed by the National Bank of Belgium in collaboration with the Deutsche Bundesbank and Eurostat for seasonal adjustment and time series analysis. It implements TRAMO/SEATS+ and X-12ARIMA/X-13ARIMA-SEATS methods and is officially recommended by the European Statistical System. The tool is designed for extensibility and reusability in Java, running on multiple platforms with Java SE 8 or later. For more details, visit the [JDemetra+ GitHub page](https://github.com/jdemetra/jdemetra-app).
+
+This repository contains the Docker setup for JDemetra+, including a noVNC setup for easy web access.
+
+![JDemetra+ Docker Image](jdemetra-docker-image.png)
+
 ## Getting Started
 
 Follow these instructions to set up JDemetra+ in a Docker container using noVNC for web access, now configured without a password for ease of access.
