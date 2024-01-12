@@ -4,10 +4,10 @@
 BINARY_URL="https://github.com/jdemetra/jdemetra-app/releases/download/v2.2.4/jdemetra-2.2.4-bin.zip"
 
 # Directory where the binary should be saved
-BINARY_DIR="./binaries"
+BINARY_DIR="./resources/binaries"
 
 # Image name for Docker
-DOCKER_IMAGE_NAME="trygu/nbdemetra:1.0"
+DOCKER_IMAGE_NAME="trygu/nbdemetra:1.2"
 
 # Ensure the binaries directory exists
 mkdir -p "$BINARY_DIR"

@@ -10,7 +10,7 @@ RUN apt-get update && \
     x11vnc xvfb unzip wget novnc net-tools openbox && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ./favicons/*.png /usr/share/novnc/app/images/icons/
+COPY ./resources/favicons/*.png /usr/share/novnc/app/images/icons/
 
 # Create a user and group for JDemetra+
 RUN groupadd -r dapla && useradd -r -g dapla -d /home/dapla -m -s /bin/bash dapla
@@ -19,26 +19,20 @@ RUN groupadd -r dapla && useradd -r -g dapla -d /home/dapla -m -s /bin/bash dapl
 ENV HOME=/home/dapla
 
 # Create the directories
-RUN mkdir -p /home/dapla/Documents/Eksempler \
-    && chown -R dapla:dapla /home/dapla /usr/share/novnc
+RUN chown -R dapla:dapla /home/dapla /usr/share/novnc
 
 # Switch to the new user
 USER dapla
-
-# Clean up not used folders. 
-RUN rm -fr /home/dapla/Downloads \
-/home/dapla/Music /home/dapla/Public /home/dapla/Pictures \
-/home/dapla/Templates /home/dapla/Videos /home/dapla/lastModified
 
 # Set the working directory to the home directory
 WORKDIR /home/dapla
 
 # Copy the JDemetra+ app and startup script into the container
-COPY --chown=dapla:dapla ./binaries/jdemetra*.zip ./
-COPY --chown=dapla:dapla ./scripts/startup.sh ./
+COPY --chown=dapla:dapla ./resources/binaries/jdemetra*.zip ./
+COPY --chown=dapla:dapla ./resources/scripts/startup.sh ./
 
 # Example data for the JDemetra+ app.
-COPY --chown=dapla:dapla ./examples/* ./Documents/
+COPY --chown=dapla:dapla ./resources/examples/* ./Documents/
 
 # Unzip the JDemetra+ app and remove the archive
 RUN unzip jdemetra*.zip && \
