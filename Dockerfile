@@ -38,7 +38,7 @@ COPY --chown=dapla:dapla ./binaries/jdemetra*.zip ./
 COPY --chown=dapla:dapla ./scripts/startup.sh ./
 
 # Example data for the JDemetra+ app.
-COPY --chown=dapla:dapla ./examples/* ./Documents/Eksempler
+COPY --chown=dapla:dapla ./examples/* ./Documents/
 
 # Unzip the JDemetra+ app and remove the archive
 RUN unzip jdemetra*.zip && \
