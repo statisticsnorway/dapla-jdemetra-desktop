@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "gcsfuse-token-provider"
+version = "0.1.0"
+description = "Token provider service for GCSFuse"
+authors = ["Dapla Developers <dapla-platform-developers@ssb.no>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+dapla-toolbelt = "^1.8.6"
+flask = "^3.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
