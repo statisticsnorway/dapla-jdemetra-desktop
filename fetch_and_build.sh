@@ -9,6 +9,12 @@ BINARY_DIR="./resources/binaries"
 # Image name for Docker
 DOCKER_IMAGE_NAME="trygu/nbdemetra:1.2"
 
+# Build gcsfuse-token-provider
+cd gcsfuse-token-provider || exit
+poetry install
+poetry build
+cd ..
+
 # Ensure the binaries directory exists
 mkdir -p "$BINARY_DIR"
 
