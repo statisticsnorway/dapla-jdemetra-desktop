@@ -69,7 +69,7 @@ jobs:
       with:
         context: .
         push: true
-        platforms: linux/amd64
+        platforms: linux/arm64
         tags: |
           ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-desktop:${{ env.VERSION }}-${{ env.JD_VERSION }}
           ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-desktop:latest
