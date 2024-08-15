@@ -1,3 +1,5 @@
+# Dapla lab version
+ARG VERSION=v0.6.0
 # Use the official Ubuntu base image
 FROM ubuntu:22.04
 
@@ -6,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk python3-xdg maven x11-xserver-utils \
+    apt-get install -y openjdk-17-jdk python3-xdg maven x11-xserver-utils \
     x11vnc xvfb unzip wget novnc net-tools openbox && \
     rm -rf /var/lib/apt/lists/*
 

@@ -1,0 +1,79 @@
+name: Build, Push, and Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"  # Runs daily at midnight to check for new JDemetra releases
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Extract VERSION from Dockerfile
+      id: extract_version
+      run: |
+        VERSION=$(grep "^ARG VERSION=" Dockerfile | cut -d '=' -f2)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Extracted version: $VERSION"
+
+    - name: Fetch latest JDemetra release version
+      id: fetch_jdemetra_version
+      run: |
+        JD_VERSION=$(curl -s https://api.github.com/repos/jdemetra/jdplus-main/releases/latest | jq -r .tag_name)
+        echo "JD_VERSION=$JD_VERSION" >> $GITHUB_ENV
+        echo "Fetched JDemetra version: $JD_VERSION"
+
+    - name: Fetch all tags
+      run: git fetch --tags
+
+    - name: Check if tag exists
+      id: check_tag
+      run: |
+        TAG_NAME="${{ env.VERSION }}-${{ env.JD_VERSION }}"
+        if git rev-parse "refs/tags/$TAG_NAME" >/dev/null 2>&1; then
+          echo "Tag $TAG_NAME already exists."
+          echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+        else
+          echo "Tag $TAG_NAME does not exist."
+          echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+        fi
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to GitHub Container Registry
+      if: env.VERSION_CHANGED == 'true'
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      if: env.VERSION_CHANGED == 'true'
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        platforms: linux/amd64
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-docker:${{ env.VERSION }}-${{ env.JD_VERSION }}
+          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-docker:latest
+
+    - name: Create GitHub Release
+      if: env.VERSION_CHANGED == 'true'
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ env.VERSION }}-${{ env.JD_VERSION }}
+        release_name: Release ${{ env.VERSION }}-${{ env.JD_VERSION }}
+        body: Release of version ${{ env.VERSION }} with JDemetra version ${{ env.JD_VERSION }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

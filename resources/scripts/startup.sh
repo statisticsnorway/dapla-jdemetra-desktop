@@ -1,14 +1,11 @@
 #!/bin/bash
 
 # Create a copy of vnc.html to index.html.
-cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
+cp /usr/share/novnc/vnc_auto.html /usr/share/novnc/index.html
 
 # Start X Virtual Framebuffer
 Xvfb :1 -screen 0 1920x1080x24 &
 sleep 5
-
-# Set DISPLAY environment variable
-export DISPLAY=:1
 
 # Make it pretty
 export X11_XFT_ANTIALIAS=1
