@@ -56,6 +56,11 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Download JDemetra binary
+      run: |
+        mkdir -p resources/binaries
+        wget -O resources/binaries/jdemetra-${{ env.JD_VERSION }}-bin.zip https://github.com/jdemetra/jdplus-main/releases/download/${{ env.JD_VERSION }}/jdemetra-${{ env.JD_VERSION }}-bin.zip
+
     - name: Build and push Docker image
       if: env.VERSION_CHANGED == 'true'
       uses: docker/build-push-action@v5
@@ -63,8 +68,8 @@ jobs:
         push: true
         platforms: linux/amd64
         tags: |
-          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-docker:${{ env.VERSION }}-${{ env.JD_VERSION }}
-          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-docker:latest
+          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-desktop:${{ env.VERSION }}-${{ env.JD_VERSION }}
+          ghcr.io/${{ github.repository_owner }}/dapla-jdemetra-desktop:latest
 
     - name: Create GitHub Release
       if: env.VERSION_CHANGED == 'true'
