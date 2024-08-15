@@ -67,6 +67,7 @@ jobs:
       if: env.VERSION_CHANGED == 'true'
       uses: docker/build-push-action@v5
       with:
+        context: .
         push: true
         platforms: linux/amd64
         tags: |
