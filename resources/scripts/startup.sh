@@ -23,7 +23,7 @@ openbox-session &
 x11vnc -forever -nopw -create -display :1 &
 
 # Start noVNC
-/usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080 &
+/usr/share/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 6080 &
 
 # Start your application (this will be the main process)
 /home/dapla/nbdemetra/bin/nbdemetra -J-Dfile.encoding=UTF-8 -J-Dnetbeans.default_userdir_root=/home/dapla/.nbdemetra

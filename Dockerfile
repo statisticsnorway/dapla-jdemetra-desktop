@@ -1,5 +1,5 @@
 # Dapla lab version
-ARG VERSION=v0.7.0
+ARG VERSION=v0.7.1
 # Use the official Ubuntu base image
 FROM ubuntu:24.04
 
