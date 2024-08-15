@@ -61,6 +61,7 @@ jobs:
         mkdir -p resources/binaries
         wget -O resources/binaries/jdemetra-standalone-${{ env.JD_VERSION }}-linux-aarch_64.zip https://github.com/jdemetra/jdplus-main/releases/download/v${{ env.JD_VERSION }}/jdemetra-standalone-${{ env.JD_VERSION }}-linux-aarch_64.zip
         ls -al resources/binaries # Verify the directory and file are present
+        pwd
 
     - name: Build and push Docker image
       if: env.VERSION_CHANGED == 'true'
