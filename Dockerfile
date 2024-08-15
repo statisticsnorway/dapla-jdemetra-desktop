@@ -30,15 +30,15 @@ USER dapla
 WORKDIR /home/dapla
 
 # Copy the JDemetra+ app and startup script into the container
-COPY --chown=dapla:dapla ./resources/binaries/jdemetra*.zip ./
+COPY --chown=dapla:dapla ./resources/binaries/jdemetra-standalone-*.zip ./
 COPY --chown=dapla:dapla ./resources/scripts/startup.sh ./
 
 # Example data for the JDemetra+ app.
 COPY --chown=dapla:dapla ./resources/examples/* ./Documents/
 
 # Unzip the JDemetra+ app and remove the archive
-RUN unzip jdemetra*.zip && \
-    rm jdemetra*.zip
+RUN unzip jdemetra-standalone-*.zip && \
+    rm jdemetra-standalone-*.zip
 
 # Set the DISPLAY environment variable
 ENV DISPLAY=:1
