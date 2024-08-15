@@ -26,7 +26,7 @@ jobs:
     - name: Fetch latest JDemetra release version
       id: fetch_jdemetra_version
       run: |
-        JD_VERSION=$(curl -s https://api.github.com/repos/jdemetra/jdplus-main/releases/latest | jq -r .tag_name)
+        JD_VERSION=$(curl -s https://api.github.com/repos/jdemetra/jdplus-main/releases/latest | jq -r .tag_name | sed 's/^v//')
         echo "JD_VERSION=$JD_VERSION" >> $GITHUB_ENV
         echo "Fetched JDemetra version: $JD_VERSION"
 
@@ -59,7 +59,7 @@ jobs:
     - name: Download JDemetra binary
       run: |
         mkdir -p resources/binaries
-        wget -O resources/binaries/jdemetra-${{ env.JD_VERSION }}-bin.zip https://github.com/jdemetra/jdplus-main/releases/download/${{ env.JD_VERSION }}/jdemetra-${{ env.JD_VERSION }}-bin.zip
+        wget -O resources/binaries/jdemetra-standalone-${{ env.JD_VERSION }}-linux-aarch_64.zip https://github.com/jdemetra/jdplus-main/releases/download/v${{ env.JD_VERSION }}/jdemetra-standalone-${{ env.JD_VERSION }}-linux-aarch_64.zip
 
     - name: Build and push Docker image
       if: env.VERSION_CHANGED == 'true'
