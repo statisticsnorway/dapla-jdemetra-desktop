@@ -1,7 +1,7 @@
 # Dapla lab version
 ARG VERSION=0.8.0
 # Base Image
-FROM ubuntu:24.04-slim
+FROM ubuntu:24.04
 
 # Set non-interactive installation mode
 ENV DEBIAN_FRONTEND=noninteractive
